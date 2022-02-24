@@ -6,6 +6,7 @@ from .serializers import CustomUserSerializer
 from rest_framework.permissions import AllowAny
 from rest_framework import generics
 from users.models import NewUser
+from rest_framework.permissions import IsAuthenticated
 
 class CustomUserCreate(generics.CreateAPIView):
     queryset = NewUser.objects.all()
@@ -22,6 +23,7 @@ class CustomUserCreate(generics.CreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ListAllUser(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = NewUser.objects.all()
     serializer_class = CustomUserSerializer
 

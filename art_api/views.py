@@ -6,12 +6,14 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAuthenticated
 # class ArtList(generics.ListCreateAPIView):  
 #     queryset = Art.objects.all()
 #     serializer_class = ArtSerializer
 
 
 class CreateArt(APIView):
+    permission_classes = [IsAuthenticated]
     # queryset = Art.objects.all()
     # serializer_class = ArtSerializer()
     parser_classes = [MultiPartParser, FormParser]

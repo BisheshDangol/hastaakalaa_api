@@ -1,8 +1,10 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _ 
-from django.contrib.auth.models import AbstractBaseUser
+# from django.contrib.auth.models import AbstractBaseUser
 from django.conf import settings
+from crum import get_current_user
+
   
 User = settings.AUTH_USER_MODEL
   
@@ -28,5 +30,13 @@ class Art(models.Model):
     # status = choice field where the status could either be showcase, sold, available
     status = models.CharField(max_length=10, choices=status_options, default='available')
     
+    def save(self, *args, **kwargs):
+        user = get_current_user()
+        if user and not user.pk:
+            user = None
+        else:
+            self.user = user
+        super(Art, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.title

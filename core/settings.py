@@ -59,9 +59,12 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'crum.CurrentRequestUserMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+ALLOWED_HOSTS=['*']
 
 ROOT_URLCONF = 'core.urls'
 
@@ -81,6 +84,7 @@ TEMPLATES = [
     },
 ]
 
+# WSGI_APPLICATION = 'core.wsgi.application'
 WSGI_APPLICATION = 'core.wsgi.application'
 
 
