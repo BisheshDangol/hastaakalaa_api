@@ -31,7 +31,13 @@ class CreateArt(APIView):
             else: 
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
+class ArtDetail(generics.ListAPIView):
+    serializer_class = ArtSerializer
 
+    def get_queryset(self):
+        slug = self.kwargs['pk']
+        print(slug)
+        return Art.objects.filter(slug=slug)
 
 class ListUserArtPost(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
