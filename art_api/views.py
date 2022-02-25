@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import filters
 # class ArtList(generics.ListCreateAPIView):  
 #     queryset = Art.objects.all()
 #     serializer_class = ArtSerializer
@@ -48,7 +49,14 @@ class ListUserArtPost(generics.ListAPIView):
         user = self.request.user
         return Art.objects.filter(user=user)
 
-# class PostListDetailFilter(generics.ListAPIView):
-#     queryset = Art.objects.all()
-#     serializer_class = ArtSerializer
+class PostListDetailFilter(generics.ListAPIView):
+    queryset = Art.objects.all()
+    serializer_class = ArtSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['$slug']
+
+    # '^' - Starts with search 
+    # '=' - Exact matches
+    # '@' - Full-text matches
+    # '$' - Regex matches
 
