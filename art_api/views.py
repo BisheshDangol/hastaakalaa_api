@@ -47,3 +47,8 @@ class ListUserArtPost(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
         return Art.objects.filter(user=user)
+
+# class PostListDetailFilter(generics.ListAPIView):
+#     queryset = Art.objects.all()
+#     serializer_class = ArtSerializer
+
