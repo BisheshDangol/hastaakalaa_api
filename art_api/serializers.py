@@ -4,4 +4,4 @@ from art.models import Art
 class ArtSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Art
-        fields = ('id','title', 'image', 'user', 'description', 'slug', 'for_sale', 'status', 'price')
+        fields = ('id','title', 'image', 'user', 'description', 'for_sale', 'status', 'price')

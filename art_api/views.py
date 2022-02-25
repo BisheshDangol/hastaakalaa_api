@@ -1,3 +1,5 @@
+from urllib import request
+from crum import get_current_user
 from rest_framework import generics
 from art.models import Art
 from .serializers import ArtSerializer
@@ -29,3 +31,13 @@ class CreateArt(APIView):
             else: 
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
+
+
+class ListUserArtPost(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    # queryset = Art.objects.filter(user=get_current_user())
+    serializer_class = ArtSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return Art.objects.filter(user=user)

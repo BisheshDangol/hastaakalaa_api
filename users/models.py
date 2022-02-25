@@ -58,6 +58,7 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomAccountManager()
     
     artist_object = ArtistObjectManager()
+
     # This email is used for the username field field while login
     USERNAME_FIELD = 'email'
     # Required fields that must be filled to submit the form

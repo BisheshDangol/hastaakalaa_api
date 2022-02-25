@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 # from django.contrib.auth.models import AbstractBaseUser
 from django.conf import settings
 from crum import get_current_user
+from autoslug import AutoSlugField
 
   
 User = settings.AUTH_USER_MODEL
@@ -22,7 +23,7 @@ class Art(models.Model):
     user = models.ForeignKey(User, default=1, null = True, on_delete=models.CASCADE)
     image = models.ImageField(_("Image"), upload_to=upload_to, default='posts/default.png')
     description = models.TextField(max_length=300)
-    slug = models.SlugField(max_length=250)
+    slug = AutoSlugField(populate_from='title')
     price = models.IntegerField()
     published = models.DateTimeField(default=timezone.now)
     # for_sale = boolean field if the post is for sale or not
@@ -30,6 +31,8 @@ class Art(models.Model):
     # status = choice field where the status could either be showcase, sold, available
     status = models.CharField(max_length=10, choices=status_options, default='available')
     
+    objects = models.Manager()
+
     def save(self, *args, **kwargs):
         user = get_current_user()
         if user and not user.pk:
