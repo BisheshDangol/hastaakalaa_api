@@ -24,7 +24,7 @@ class Art(models.Model):
     image = models.ImageField(_("Image"), upload_to=upload_to, default='posts/default.png')
     description = models.TextField(max_length=300)
     slug = AutoSlugField(populate_from='title')
-    price = models.IntegerField()
+    price = models.CharField(max_length=10)
     published = models.DateTimeField(default=timezone.now)
     # for_sale = boolean field if the post is for sale or not
     for_sale = models.BooleanField(default=True)
