@@ -60,3 +60,6 @@ class PostListDetailFilter(generics.ListAPIView):
     # '@' - Full-text matches
     # '$' - Regex matches
 
+class RetrieveAllArtPost(generics.ListAPIView):
+    queryset = Art.objects.all()
+    serializer_class = ArtSerializer
