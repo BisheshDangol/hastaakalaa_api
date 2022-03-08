@@ -10,6 +10,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import filters
+from django.shortcuts import get_list_or_404
 # class ArtList(generics.ListCreateAPIView):  
 #     queryset = Art.objects.all()
 #     serializer_class = ArtSerializer
