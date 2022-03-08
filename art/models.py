@@ -30,7 +30,9 @@ class Art(models.Model):
     for_sale = models.BooleanField(default=True)
     # status = choice field where the status could either be showcase, sold, available
     status = models.CharField(max_length=10, choices=status_options, default='available')
-    
+    likes = models.ManyToManyField(User, related_name='art_posts')
+
+
     objects = models.Manager()
 
     def save(self, *args, **kwargs):
