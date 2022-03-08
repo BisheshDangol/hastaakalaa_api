@@ -15,6 +15,9 @@ from rest_framework import filters
 #     serializer_class = ArtSerializer
 
 
+def LikeView(request, pk):
+    pass
+
 class CreateArt(APIView):
     permission_classes = [IsAuthenticated]
     # queryset = Art.objects.all()
