@@ -3,6 +3,7 @@ from crum import get_current_user
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from rest_framework import generics
+from art import models
 from art.models import Art
 from users.models import NewUser
 from .serializers import ArtSerializer
@@ -42,12 +43,14 @@ class LikeView(APIView):
         art = get_object_or_404(Art,id=art_id)
         user_id = self.request.user.id
         
-        # if Art.objects.filter(id=art_id).exists():
-        print(user_id)
-        art.likes.add(user_id)
-        return HttpResponse('Value found')
-        # else:
-        # return HttpResponse('Value not found')
+        if models.Art.likes.through.objects.filter(art_id=art_id, newuser_id=user_id):  
+            print(user_id)
+            # art.likes.add(user_id)
+            models.Art.likes.through.objects.filter(art_id=art_id, newuser_id=user_id).delete()
+            return HttpResponse('Value found was found and deleted')
+        else:
+            art.likes.add(user_id)
+            return HttpResponse('Value was not found. Value is now created')
 
 
 class CreateArt(APIView):
