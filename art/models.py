@@ -30,8 +30,10 @@ class Art(models.Model):
     for_sale = models.BooleanField(default=True)
     # status = choice field where the status could either be showcase, sold, available
     status = models.CharField(max_length=10, choices=status_options, default='available')
-    likes = models.ManyToManyField(User, related_name='art_posts')
+    likes = models.ManyToManyField(User, related_name='art_posts', blank=True)
 
+    def get_likes(self):
+        return ",".join([str(p) for p in self.likes.all()])
 
     objects = models.Manager()
 
@@ -45,3 +47,14 @@ class Art(models.Model):
 
     def __str__(self):
         return self.title
+
+
+# class Vote(models.Model):
+#     user_id = models.ForeignKey(User, default=1, null = True, on_delete=models.CASCADE)
+#     art_id = models.ForeignKey(Art, default=1, null = True, on_delete=models.CASCADE)
+
+#     objects = models.Manager()
+
+    
+
+        

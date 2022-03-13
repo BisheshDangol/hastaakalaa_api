@@ -1,7 +1,10 @@
 from urllib import request
 from crum import get_current_user
+from django.http import HttpResponse
+from django.urls import reverse_lazy
 from rest_framework import generics
 from art.models import Art
+from users.models import NewUser
 from .serializers import ArtSerializer
 from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -10,14 +13,42 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import filters
-from django.shortcuts import get_list_or_404
+from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy, reverse
+from django.views.decorators.csrf import csrf_exempt
 # class ArtList(generics.ListCreateAPIView):  
 #     queryset = Art.objects.all()
 #     serializer_class = ArtSerializer
 
+# @csrf_exempt
+# def LikeView(self,request, art_id):
+#     permission_classes = [IsAuthenticated]
 
-def LikeView(request, pk):
-    pass
+#     if request.method == 'POST':
+#         # recieve post data
+#         art = get_object_or_404(Art, id=art_id)
+#         user_id = self.request.user.id
+#         print(user_id)
+#         art.likes.add(user_id)
+
+        
+#         return HttpResponse('Value recorded')
+#     else:
+#         return HttpResponse('Value Not recorded')
+
+class LikeView(APIView):
+    def post(self,request,art_id):
+        
+        art = get_object_or_404(Art,id=art_id)
+        user_id = self.request.user.id
+        
+        # if Art.objects.filter(id=art_id).exists():
+        print(user_id)
+        art.likes.add(user_id)
+        return HttpResponse('Value found')
+        # else:
+        # return HttpResponse('Value not found')
+
 
 class CreateArt(APIView):
     permission_classes = [IsAuthenticated]
@@ -35,7 +66,15 @@ class CreateArt(APIView):
                 return Response(serializer.data, status=status.HTTP_200_OK)
             else: 
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
+
+class ArtDetails(generics.ListAPIView):
+    serializer_class = ArtSerializer
+
+    def get_queryset(self):
+        id = self.kwargs['pk']
+        print(id)
+        return Art.objects.filter(slug=id)
+
 class ArtDetail(generics.ListAPIView):
     serializer_class = ArtSerializer
 
