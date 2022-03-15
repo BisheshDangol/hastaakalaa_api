@@ -25,6 +25,7 @@ class Art(models.Model):
     description = models.TextField(max_length=300)
     slug = AutoSlugField(populate_from='title')
     price = models.CharField(max_length=10)
+    genre = models.CharField(max_length=20, null=True)
     published = models.DateTimeField(default=timezone.now)
     # for_sale = boolean field if the post is for sale or not
     for_sale = models.BooleanField(default=True)
