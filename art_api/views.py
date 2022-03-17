@@ -109,3 +109,10 @@ class PostListDetailFilter(generics.ListAPIView):
 class RetrieveAllArtPost(generics.ListAPIView):
     queryset = Art.objects.all()
     serializer_class = ArtSerializer
+
+class AbstractGenreArtFilter(generics.ListAPIView):
+    serializer_class = ArtSerializer
+    def get_queryset(self):
+        genre = self.kwargs['genre']
+        return Art.objects.filter(genre=genre)
+        
