@@ -43,6 +43,10 @@ class Art(models.Model):
     status = models.CharField(max_length=10, choices=status_options, default='available')
     likes = models.ManyToManyField(User, related_name='art_posts', blank=True)
     bookmarks = models.ManyToManyField(User, related_name='bookmark_post', blank=True)
+
+    def get_bookmarks(self):
+        return ",".join([str(p) for p in self.bookmarks.all()])
+
     def get_likes(self):
         return ",".join([str(p) for p in self.likes.all()])
 
