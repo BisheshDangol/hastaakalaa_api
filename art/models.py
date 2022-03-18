@@ -42,7 +42,7 @@ class Art(models.Model):
     # status = choice field where the status could either be showcase, sold, available
     status = models.CharField(max_length=10, choices=status_options, default='available')
     likes = models.ManyToManyField(User, related_name='art_posts', blank=True)
-
+    bookmarks = models.ManyToManyField(User, related_name='bookmark_post', blank=True)
     def get_likes(self):
         return ",".join([str(p) for p in self.likes.all()])
 
