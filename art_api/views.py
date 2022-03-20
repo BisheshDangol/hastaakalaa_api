@@ -115,4 +115,21 @@ class AbstractGenreArtFilter(generics.ListAPIView):
     def get_queryset(self):
         genre = self.kwargs['genre']
         return Art.objects.filter(genre=genre)
+
+class BookmarkArt(APIView):
+    serializer_class = ArtSerializer
+
+    def post(self,request,art_id):
         
+        art = get_object_or_404(Art,id=art_id)
+        user_id = self.request.user.id
+
+        if models.Art.bookmarks.through.objects.filter(art_id=art_id, newuser_id=user_id):  
+            print(user_id)
+            models.Art.bookmarks.through.objects.filter(art_id=art_id, newuser_id=user_id).delete()
+            return HttpResponse('Bookmark found was found and deleted')
+        else:
+            art.likes.add(user_id)
+            return HttpResponse('Bookmark was not found. Value is now created')
+    
+    pass
