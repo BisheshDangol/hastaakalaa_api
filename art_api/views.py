@@ -129,7 +129,17 @@ class BookmarkArt(APIView):
             models.Art.bookmarks.through.objects.filter(art_id=art_id, newuser_id=user_id).delete()
             return HttpResponse('Bookmark found was found and deleted')
         else:
-            art.likes.add(user_id)
+            art.bookmarks.add(user_id)
             return HttpResponse('Bookmark was not found. Value is now created')
     
-    pass
+
+
+class GetBookmarkArtView(APIView):
+    def post(self, request, art_id):
+
+        art= get_object_or_404(Art, id=art_id)
+
+        user_id = self.request.user.id
+
+        if models.Art.bookmarks.through.objects.filter(art_id=art_id, newuser_id=user_id):
+            return Art.objects.filter(user__id=user_id)

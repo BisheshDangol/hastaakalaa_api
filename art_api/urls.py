@@ -1,5 +1,5 @@
 from django.urls import path 
-from .views import AbstractGenreArtFilter, ArtDetail, ArtDetails, CreateArt, LikeView, ListUserArtPost, PostListDetailFilter, RetrieveAllArtPost
+from .views import AbstractGenreArtFilter, ArtDetail, ArtDetails, BookmarkArt, CreateArt, LikeView, ListUserArtPost, PostListDetailFilter, RetrieveAllArtPost
 
 app_name = 'art_api'
 
@@ -18,5 +18,7 @@ urlpatterns = [
     path('get_all_art_post_user/', ListUserArtPost.as_view(), name='listuserartposts'),
     path('retrieve_art_post/', RetrieveAllArtPost.as_view(), name='retrieveartpost'),
     path('likes/<int:art_id>/change/', LikeView.as_view(), name='likeposts'),
-    path('genre/<str:genre>', AbstractGenreArtFilter.as_view(), name='filterabstract')
+    path('genre/<str:genre>', AbstractGenreArtFilter.as_view(), name='filterabstract'),
+    path('bookmark/<int:art_id>/', BookmarkArt.as_view(), name='filterabstract'),
+    
 ]

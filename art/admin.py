@@ -14,3 +14,8 @@ class AuthorAdmin(admin.ModelAdmin):
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ('id', 'newuser_id', 'art_id')
     # prepopulated_fields = {'slug':('title',), }
+    
+@admin.register(models.Art.bookmarks.through)
+class AuthorAdmin(admin.ModelAdmin):
+    list_display = ('id', 'newuser_id', 'art_id')
+
