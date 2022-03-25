@@ -10,3 +10,5 @@ class Bookmark(models.Model):
     art = models.ForeignKey(Art, default=1, null=True, on_delete=models.CASCADE)
     
     objects = models.Manager()
+
+  
