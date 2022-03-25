@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'art',
     'art_api',
     'users',
+    'bookmark',
+    'bookmark_api',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
