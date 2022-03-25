@@ -134,12 +134,14 @@ class BookmarkArt(APIView):
     
 
 
-class GetBookmarkArtView(APIView):
-    def post(self, request, art_id):
-
-        art= get_object_or_404(Art, id=art_id)
-
+class GetBookmarkArtView(generics.ListAPIView):
+    serializer_class = ArtSerializer
+    def get_queryset(self):
+        
         user_id = self.request.user.id
+        bookmark = models.Art.bookmarks.through
+        if models.Art.bookmarks.through.objects.filter(newuser_id=user_id):
+            return Art.objects.filter(bookmarks__newuser_id=user_id).all()
 
-        if models.Art.bookmarks.through.objects.filter(art_id=art_id, newuser_id=user_id):
-            return Art.objects.filter(user__id=user_id)
+        else: 
+            return HttpResponse('Bookmark was not found. Value is now created')
