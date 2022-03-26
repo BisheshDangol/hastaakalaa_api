@@ -140,12 +140,9 @@ class GetBookmarkArtView(generics.ListAPIView):
     def get_queryset(self):
         
         user_id = self.request.user.id
-        bookmark = models.Art.bookmarks.through
-        if models.Art.bookmarks.through.objects.filter(newuser_id=user_id):
-            return Art.objects.filter(bookmarks__newuser_id=user_id).all()
+        
+        
+        return Art.objects.filter(bookmark__user=user_id).all()
 
-        else: 
-            return HttpResponse('Bookmark was not found. Value is now created')
-
-
+      
 

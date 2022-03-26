@@ -45,13 +45,7 @@ class BookmarkArt(APIView):
             serializer.save()
             return HttpResponse('Bookmark created')
 
-            # if serializer.is_valid():
-                
-                # new_serializer_data = list(serializer._data)
-                # new_serializer_data.append({'user': user_id, 'art': art_id})
-                # serializer.save()
-                # print(serializer.data)
-                # return Response(new_serializer_data)
+            
                 
                 
                 
