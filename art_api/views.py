@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from rest_framework import generics
 from art import models
 from art.models import Art
+from bookmark_api.serializers import BookmarkSerializer
 from users.models import NewUser
 from .serializers import ArtSerializer
 from rest_framework.views import APIView
@@ -145,3 +146,6 @@ class GetBookmarkArtView(generics.ListAPIView):
 
         else: 
             return HttpResponse('Bookmark was not found. Value is now created')
+
+
+

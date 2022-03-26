@@ -14,7 +14,9 @@ urlpatterns = [
     # path('api/', include('art_api.urls', namespace='art_api')),
     path('token/', obtain_auth_token, name='token'),
     path('api/user/', include('users.urls', namespace='users')),
-    path('api/art/', include('art_api.urls', namespace='art'))
+    path('api/art/', include('art_api.urls', namespace='art')),
+    path('api/', include('bookmark_api.urls', namespace='bookmark'))
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

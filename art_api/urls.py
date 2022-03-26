@@ -22,4 +22,5 @@ urlpatterns = [
     path('bookmark/<int:art_id>/', BookmarkArt.as_view(), name='filterabstract'),
     path('bookmark/get/', GetBookmarkArtView.as_view(), name='getbookmak'),
     
+    
 ]
