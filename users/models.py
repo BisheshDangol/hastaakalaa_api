@@ -4,11 +4,14 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _ 
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
+from core import settings
+
 USER_TYPES = (
     ('art collector', 'Art Collector'),
     ('artist', 'Artist'),
 )
 
+User = settings.AUTH_USER_MODEL
 
 class CustomAccountManager(BaseUserManager):
     def create_superuser(self, email, user_name, first_name, password, last_name, address, user_type, **other_fields):
@@ -54,6 +57,14 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     # This true signifies that the user can now use login function
     is_active = models.BooleanField(default=True)
+    follower = models.ManyToManyField(User, related_name='followers', blank=True)
+    followedby = models.ManyToManyField(User, related_name='followed_by', blank=True)
+
+    def get_followers(self):
+        return ",".join([str(p) for p in self.follower.all()])
+
+    def get_followedby(self):
+        return ",".join([str(p) for p in self.followedby.all()])
 
     objects = CustomAccountManager()
     
