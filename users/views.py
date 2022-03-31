@@ -31,6 +31,14 @@ class ListAllUser(generics.ListAPIView):
     queryset = NewUser.objects.all()
     serializer_class = CustomUserSerializer
 
+class GetCurrentUser(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = CustomUserSerializer
+    def get_queryset(self):
+        user = self.request.user.id
+        return NewUser.objects.filter(id=user)
+
+
 
 class ListAllArtistUser(generics.ListAPIView):
     queryset = NewUser.artist_object.all()
