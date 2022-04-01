@@ -128,10 +128,10 @@ class BookmarkArt(APIView):
         if models.Art.bookmarks.through.objects.filter(art_id=art_id, newuser_id=user_id):  
             print(user_id)
             models.Art.bookmarks.through.objects.filter(art_id=art_id, newuser_id=user_id).delete()
-            return HttpResponse('Bookmark found was found and deleted')
+            return HttpResponse('Found')
         else:
             art.bookmarks.add(user_id)
-            return HttpResponse('Bookmark was not found. Value is now created')
+            return HttpResponse('NotFound')
     
 
 
