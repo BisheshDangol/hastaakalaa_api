@@ -48,10 +48,10 @@ class LikeView(APIView):
             print(user_id)
             # art.likes.add(user_id)
             models.Art.likes.through.objects.filter(art_id=art_id, newuser_id=user_id).delete()
-            return HttpResponse('Value found was found and deleted')
+            return HttpResponse('Found')
         else:
             art.likes.add(user_id)
-            return HttpResponse('Value was not found. Value is now created')
+            return HttpResponse('NotFound')
 
 
 class CreateArt(APIView):
