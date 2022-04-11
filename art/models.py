@@ -20,7 +20,7 @@ genre_options = [
     ('pop', 'Pop'),
     ('realism', 'Realism'),
     ('potrait', 'Potrait'),
-    ('potrait', 'Potrait'),
+    # ('potrait', 'Potrait'),
     ('landscape', 'Landscape'),
     ('mithila', 'Mithila'),
 ]

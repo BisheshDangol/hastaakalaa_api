@@ -1,5 +1,5 @@
 from django.urls import path 
-from .views import AbstractGenreArtFilter, ArtDetail, ArtDetails, BookmarkArt, CreateArt, GetBookmarkArtView, LikeView, ListUserArtPost, PostListDetailFilter, RetrieveAllArtPost
+from .views import AbstractGenreArtFilter, ArtDetail, ArtDetails, BookmarkArt, CreateArt, GetBookmarkArtView, GetBuyArtView, LikeView, ListUserArtPost, PostListDetailFilter, RetrieveAllArtPost
 
 app_name = 'art_api'
 
@@ -21,6 +21,7 @@ urlpatterns = [
     path('genre/<str:genre>', AbstractGenreArtFilter.as_view(), name='filterabstract'),
     path('bookmark/<int:art_id>/', BookmarkArt.as_view(), name='filterabstract'),
     path('bookmark/get/', GetBookmarkArtView.as_view(), name='getbookmak'),
+    path('buy/', GetBuyArtView.as_view(), name='buy'),
     
    
 ]

@@ -31,11 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'art',
-    'art_api',
-    'users',
-    'bookmark',
-    'bookmark_api',
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,6 +41,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'django_filters',
+    'art',
+    'art_api',
+    'users',
+    'bookmark',
+    'bookmark_api',
 ]
 
 # Custom User Model

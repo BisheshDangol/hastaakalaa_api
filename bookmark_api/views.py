@@ -37,13 +37,13 @@ class BookmarkArt(APIView):
             print(art_id)
             
             models.Bookmark.objects.filter(art=art_id, user=user_id).delete()
-            return HttpResponse('Bookmark was found and deleted')
+            return HttpResponse('Found')
         else:     
             data = { 'user': user_id, 'art': art_id }
             serializer = BookmarkSerializer(data=data, partial=True)
             serializer.is_valid(raise_exception=True)
             serializer.save()
-            return HttpResponse('Bookmark created')
+            return HttpResponse('NotFound')
 
             
                 

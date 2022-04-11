@@ -63,7 +63,14 @@ class CreateArt(APIView):
     def post(self, request, format=None):
         print(request.data)
         if request.method == 'POST':
+
             serializer = ArtSerializer(data=request.data)
+            # print('=================')
+            # current_user = request.user
+            # user = 
+            # print(current_user.id)
+            # print('=================')
+
             print(serializer)
             if serializer.is_valid():
                 serializer.save()
@@ -100,7 +107,7 @@ class PostListDetailFilter(generics.ListAPIView):
     queryset = Art.objects.all()
     serializer_class = ArtSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['$slug']
+    search_fields = ['$slug', '$description']
 
     # '^' - Starts with search 
     # '=' - Exact matches
@@ -144,5 +151,9 @@ class GetBookmarkArtView(generics.ListAPIView):
         
         return Art.objects.filter(bookmark__user=user_id).all()
 
-      
+
+
+class GetBuyArtView(generics.ListAPIView):
+    serializer_class = ArtSerializer
+    queryset = Art.objects.all().filter(status='available')
 
