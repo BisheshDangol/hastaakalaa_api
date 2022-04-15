@@ -15,7 +15,8 @@ urlpatterns = [
     path('token/', obtain_auth_token, name='token'),
     path('api/user/', include('users.urls', namespace='users')),
     path('api/art/', include('art_api.urls', namespace='art')),
-    path('api/', include('bookmark_api.urls', namespace='bookmark'))
+    path('api/', include('bookmark_api.urls', namespace='bookmark')),
+    path('api/', include('comment_api.urls', namespace='comment'))
 
 ]
 

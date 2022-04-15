@@ -11,6 +11,7 @@ from users.models import NewUser
 from .models import NewUser as user_model
 from rest_framework.permissions import IsAuthenticated
 from users import models
+from rest_framework import filters
 
 class CustomUserCreate(generics.CreateAPIView):
     queryset = NewUser.objects.all()
@@ -76,3 +77,11 @@ class FollowedView(APIView):
         else:
             users.followedby.add(gottenuser)
             return HttpResponse('Value was not found. Value is now created')
+
+
+
+class UserFilter(generics.ListAPIView):
+    serializer_class = CustomUserSerializer
+    def get_queryset(self):
+        user = self.kwargs['user_name']
+        return NewUser.objects.filter(user_name=user)

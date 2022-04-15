@@ -3,6 +3,7 @@ from crum import get_current_user
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from rest_framework import generics
+from art.models import Art
 from art_api.serializers import ArtSerializer
 from bookmark import models
 from bookmark.models import Bookmark
@@ -44,9 +45,8 @@ class BookmarkArt(APIView):
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return HttpResponse('NotFound')
-
             
-                
-                
+
+
                 
                

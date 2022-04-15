@@ -115,6 +115,7 @@ class PostListDetailFilter(generics.ListAPIView):
     # '$' - Regex matches
 
 class RetrieveAllArtPost(generics.ListAPIView):
+    
     queryset = Art.objects.all()
     serializer_class = ArtSerializer
 
@@ -143,6 +144,7 @@ class BookmarkArt(APIView):
 
 
 class GetBookmarkArtView(generics.ListAPIView):
+    permission_class = [IsAuthenticated]
     serializer_class = ArtSerializer
     def get_queryset(self):
         
@@ -155,5 +157,16 @@ class GetBookmarkArtView(generics.ListAPIView):
 
 class GetBuyArtView(generics.ListAPIView):
     serializer_class = ArtSerializer
-    queryset = Art.objects.all().filter(status='available')
+    queryset = Art.objects.all().filter(for_sale=True)
+
+
+class GetSellArtView(generics.ListAPIView):
+
+    # queryset = Art.objects.filter(user=get_current_user())
+    serializer_class = ArtSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return Art.objects.filter(user=user, for_sale=True)
+
 
