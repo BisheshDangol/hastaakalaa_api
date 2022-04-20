@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy
 from rest_framework import generics
 from art import models
-from art.models import Art
+from art.models import Art, User
 from bookmark_api.serializers import BookmarkSerializer
 from users.models import NewUser
 from .serializers import ArtSerializer
@@ -103,6 +103,14 @@ class ListUserArtPost(generics.ListAPIView):
         user = self.request.user
         return Art.objects.filter(user=user)
 
+class GetOtherArtPost(generics.ListAPIView):
+    serializer_class = ArtSerializer
+
+    def get_queryset(self):
+        user_id = self.kwargs['pk']
+        print(user_id)
+        return Art.objects.filter(user=user_id)
+
 class PostListDetailFilter(generics.ListAPIView):
     queryset = Art.objects.all()
     serializer_class = ArtSerializer
@@ -170,3 +178,16 @@ class GetSellArtView(generics.ListAPIView):
         return Art.objects.filter(user=user, for_sale=True)
 
 
+class DeleteArtView(APIView):
+    serializer_class = ArtSerializer
+
+    def post(self, request, art):
+        user = self.request.user.id
+
+        art = Art.objects.get(id=art, user=user)
+
+        art.is_deleted = True
+
+        art.save()
+
+        return Response(status.HTTP_200_OK)

@@ -16,7 +16,9 @@ urlpatterns = [
     path('api/user/', include('users.urls', namespace='users')),
     path('api/art/', include('art_api.urls', namespace='art')),
     path('api/', include('bookmark_api.urls', namespace='bookmark')),
-    path('api/', include('comment_api.urls', namespace='comment'))
+    path('api/', include('comment_api.urls', namespace='comment')),
+    path('api/follow_user/', include('follow_api.urls', namespace='follow')),
+    path('api/pay/', include('payment_api.urls', namespace='payment')),
 
 ]
 

@@ -3,7 +3,7 @@ from . import models
 
 @admin.register(models.Art)
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('title', 'id', 'user', 'image', 'description', 'slug', 'price', 'status', 'genre', 'for_sale', 'published', 'get_likes', 'get_bookmarks')
+    list_display = ('title', 'id', 'user', 'image', 'description', 'slug', 'price', 'status', 'genre', 'for_sale', 'published', 'get_likes', 'get_bookmarks', 'is_deleted')
     # prepopulated_fields = {'slug':('title',), }
 
 # @admin.register(models.Vote)

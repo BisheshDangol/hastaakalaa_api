@@ -48,6 +48,10 @@ INSTALLED_APPS = [
     'bookmark_api',
     'comment',
     'comment_api',
+    'follow',
+    'follow_api',
+    'payment',
+    'payment_api',
 ]
 
 # Custom User Model

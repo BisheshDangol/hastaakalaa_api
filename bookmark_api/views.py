@@ -26,6 +26,7 @@ from rest_framework.generics import GenericAPIView
 
 # @csrf_exempt
 class BookmarkArt(APIView):
+    permission_classes = [IsAuthenticated]
     serializer_class = BookmarkSerializer
     # queryset = Bookmark.objects.all()
     
@@ -33,7 +34,9 @@ class BookmarkArt(APIView):
         # bookmark = Bookmark.objects.get()    
 
         user_id = self.request.user.id
-
+        print('==========')
+        print(user_id)
+        print('==========')
         if models.Bookmark.objects.filter(art=art_id, user=user_id):  
             print(art_id)
             
