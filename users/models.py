@@ -40,6 +40,9 @@ class CustomAccountManager(BaseUserManager):
         user.save()
         return user
 
+def upload_to(instance, filename):
+    return 'posts/{filename}'.format(filename=filename)
+    
 class NewUser(AbstractBaseUser, PermissionsMixin):
 
     # Custom manager this post object that returns the posts that have status published.
@@ -52,6 +55,7 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=100, blank=False)
     last_name = models.CharField(max_length=100, blank=False)
     address = models.CharField(max_length=150)
+    profile_picture = models.ImageField(_("Image"), upload_to=upload_to, default='posts/default.png')
     phone_number = models.CharField(max_length=30, blank=False, default="0000000000")
     user_type = models.CharField(choices=USER_TYPES, max_length=100, default="artist")
     is_staff = models.BooleanField(default=False)
@@ -76,5 +80,5 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['user_name', 'first_name']
 
     def __str__(self):
-        return self.email
+        return self.user_name
 

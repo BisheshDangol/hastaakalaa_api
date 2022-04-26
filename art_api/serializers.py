@@ -4,6 +4,7 @@ from users.serializers import CustomUserSerializer
 
 class ArtSerializer(serializers.ModelSerializer):
     # user = CustomUserSerializer(many=False)
+    # user = serializers.StringRelatedField()
     class Meta: 
         model = Art
         fields = ('id','title', 'image', 'genre', 'user', 'description', 'for_sale', 'status', 'price', 'likes')

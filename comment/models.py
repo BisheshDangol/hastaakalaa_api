@@ -13,3 +13,5 @@ class Comment(models.Model):
     published = models.DateTimeField(default=timezone.now)
 
     objects = models.Manager()
+
+    

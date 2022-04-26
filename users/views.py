@@ -85,3 +85,17 @@ class UserFilter(generics.ListAPIView):
     def get_queryset(self):
         user = self.kwargs['user_name']
         return NewUser.objects.filter(user_name=user)
+
+
+class UploadProfilePicture(APIView):
+    def post(self, request):
+
+        user_id = self.request.user.id
+
+        user = NewUser.objects.get(id=user_id)
+
+        user.profile_picture = request.data['image']
+
+        user.save()
+
+        return Response(status=status.HTTP_200_OK)
